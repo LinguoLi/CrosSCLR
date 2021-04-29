@@ -55,6 +55,7 @@ We only test our code on the following environment:
   # train on NTU-RGB+D xview
   $ python main.py pretrain_crossclr_3views --config config/CrosSCLR/crossclr_3views_xview.yaml
   ```
+- The pre-trained models are in the diretory: `weights/`
 
 ## Linear Evaluation
 
@@ -62,6 +63,8 @@ We only test our code on the following environment:
   ```bash
   # evaluate pre-trained model on NTU-RGB+D xview
   $ python main.py linear_evaluation --config config/linear_eval/linear_eval_crossclr_3views_xview.yaml --weights <path to weights>
+  # evaluate the provided pre-trained model
+  $ python main.py linear_evaluation --config config/linear_eval/linear_eval_crossclr_3views_xview.yaml --weights weights/crossclr_3views_xview_frame50_channel16_cross150_epoch300.pt
   ```
   
  ## Results
@@ -76,7 +79,7 @@ The **Top-1 accuracy** results on two datasets for the linear evaluation of our 
 
 ## Visualization
 
-The **t-SNE** visualization of the embeddings during SkeletonCLR and CrosSCLR pre-training.
+The [**t-SNE**](https://www.jmlr.org/papers/volume9/vandermaaten08a/vandermaaten08a.pdf) visualization of the embeddings during SkeletonCLR and CrosSCLR pre-training.
 
 <div align=center>
     <img src="resource/figures/tsne.gif", width="800" >
