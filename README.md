@@ -55,7 +55,7 @@ We only test our code on the following environment:
   # train on NTU-RGB+D xview
   $ python main.py pretrain_crossclr_3views --config config/CrosSCLR/crossclr_3views_xview.yaml
   ```
-- The pre-trained models are in the diretory: `weights/`
+- The pre-trained models are in the directory: `weights/`
 
 ## Linear Evaluation
 
