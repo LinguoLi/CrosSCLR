@@ -1,0 +1,54 @@
+work_dir: work_dir/crossclr_3views/1_xview_frame50_channel16_epoch300_cross150
+
+# feeder
+train_feeder: feeder.ntu_feeder.Feeder_dual
+train_feeder_args:
+  data_path: data/NTU60_frame50/xview/train_position.npy
+  label_path: data/NTU-RGB-D/xview/train_label.pkl 
+  shear_amplitude: 0.5
+  temperal_padding_ratio: 6
+  mmap: True
+
+# model
+model: net.crossclr_3views.CrosSCLR
+model_args:
+  base_encoder: net.st_gcn.Model
+  pretrain: True
+  feature_dim: 128
+  queue_size: 32768
+  momentum: 0.999
+  Temperature: 0.07
+  mlp: True
+  in_channels: 3
+  hidden_channels: 16 # 1/4 x channels of standard stgcn
+  hidden_dim: 256
+  num_class: 60
+  dropout: 0.5
+  graph_args:
+    layout: 'ntu-rgb+d'
+    strategy: 'spatial'
+  edge_importance_weighting: True
+
+# optim
+nesterov: False
+weight_decay: 1e-4
+base_lr: 0.1
+optimizer: SGD
+step: [250]
+
+# training
+device: [0]
+batch_size: 128
+test_batch_size: 128
+num_epoch: 300
+start_epoch: 0
+
+# cross training
+topk: 1
+view: 'all'
+cross_epoch: 150
+context: True
+
+# log
+save_interval: 5
+eval_interval: -1
